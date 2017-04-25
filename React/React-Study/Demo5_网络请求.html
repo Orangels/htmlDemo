@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>跨域网络请求</title>
+    <script src="//cdn.bootcss.com/react/15.4.2/react.js"></script>
+    <script src="//cdn.bootcss.com/react/15.4.2/react-dom.js"></script>
+    <script src="//cdn.bootcss.com/babel-standalone/6.23.1/babel.js"></script>
+</head>
+<body>
+    <div id="demo"></div>
+    <script type="text/babel">
+
+        let gitArr = new Array();
+
+        class MyComplent extends React.Component{
+            constructor (...args){
+                super(...args);
+                this.state = {
+                    username: '',
+                    lastGistUrl:'',
+                    //loading 这个属性帮助 主动触发渲染 render() 方法,返回不同的组件
+                    loading:true
+                }
+            }
+            componentDidMount() {
+                fetch(this.props.source)
+                    .then((response)=>{
+                        return response.json();
+                    })
+                    .then((json)=>{
+                        gitArr = json.items;
+                        this.setState({
+                            loading:false
+                        })
+                    })
+                    .catch((e)=>{console.log(`error:${e}`)});
+            }
+            render() {
+                if (this.state.loading){
+                    return <h1>Loading...</h1>
+                }
+                return(
+                <ol>
+                    {
+                        gitArr.map((git)=>{
+                            return(
+                            <li>
+                                {git.name} 's last gist is <a href={git.html_url} target="_blank">here</a>
+                            </li>
+                            );
+                    })}
+                </ol>
+                );
+            }
+        }
+        ReactDOM.render(<MyComplent source="https://api.github.com/search/repositories?q=javascript&sort=stars" />,document.getElementById('demo'));
+    </script>
+</body>
+</html>

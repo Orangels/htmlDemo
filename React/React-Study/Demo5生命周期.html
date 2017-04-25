@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>组件生命周期</title>
+    <script src="//cdn.bootcss.com/react/15.4.2/react.js"></script>
+    <script src="//cdn.bootcss.com/react/15.4.2/react-dom.js"></script>
+    <script src="//cdn.bootcss.com/babel-standalone/6.23.1/babel.js"></script>
+</head>
+<body>
+    <!--组件三个生命周期,React 为每个状态都提供了两种处理函数，will 函数在进入状态之前调用，did 函数在进入状态之后调用，三种状态共计五种处理函数。-->
+    <!--Mounting：已插入真实 DOM-->
+    <!--Updating：正在被重新渲染-->
+    <!--Unmounting：已移出真实 DOM-->
+
+    <!--componentWillMount()-->
+    <!--componentDidMount()-->
+    <!--componentWillUpdate(object nextProps, object nextState)-->
+    <!--componentDidUpdate(object prevProps, object prevState)-->
+    <!--componentWillUnmount()-->
+    <!--React 还提供两种特殊状态的处理函数。-->
+    <!--componentWillReceiveProps(object nextProps)：已加载组件收到新的参数时调用-->
+    <!--shouldComponentUpdate(object nextProps, object nextState)：组件判断是否重新渲染时调用-->
+    <div id="demo"></div>
+    <script type="text/babel">
+        class MyComplent extends React.Component {
+            constructor(...args) {
+                super(...args);
+                this.state = {
+                    opacity: 1.0,
+                };
+            }
+
+            componentDidMount() {
+                this.timer = setInterval(() => {
+                    let opacity = this.state.opacity;
+                    opacity -= 0.05;
+                    if (opacity < 0.1) {
+                        opacity = 1.0;
+                        console.log(opacity);
+                    }
+                    this.setState({
+                        opacity: opacity,
+                    });
+                }, 100);
+            }
+
+            render (){
+                return <div>
+                    <h1 style={{opacity:this.state.opacity}} onClick={asd()} >hello {this.props.name}</h1>
+                    <button onClick={()=>{
+                        clearInterval(this.timer);
+                        this.setState({
+                            opacity:1.0
+                        });
+                    }
+                    }>清除定时器</button>
+                </div>
+            }
+        }
+        ReactDOM.render(<MyComplent name = 'world'/>,document.getElementById('demo'));
+
+
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

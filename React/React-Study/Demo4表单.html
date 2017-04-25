@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>表单Demo4</title>
+    <script src="//cdn.bootcss.com/react/15.4.2/react.js"></script>
+    <script src="//cdn.bootcss.com/react/15.4.2/react-dom.js"></script>
+    <script src="//cdn.bootcss.com/babel-standalone/6.23.1/babel.js"></script>
+</head>
+<body>
+    <div id="demo4"></div>
+    <script type="text/babel">
+        class MyComplent extends React.Component{
+            constructor (...args){
+                super (...args);
+                this.state = {
+                    text:'改变输入改变 P',
+                };
+                this.handleChange = this.handleChange.bind(this);
+            }
+            handleChange(e) {
+                //实现方式1, 获取真实 p 标签,改变 innerHtml 值
+//                this.complentP.innerHTML = e.target.value;
+                //实现方式2 改变 this.state, 动态改变 P
+                this.setState({
+                    text:e.target.value,
+                });
+            }
+
+            cleanText() {
+                this.setState({
+                    text:'',
+                });
+                this.input.value = '';
+            }
+
+            //实现方式1 设定 p 标签的 ref, 获取 真是 dom P 标签,改变 innerHTML
+//            render() {
+//                return <div>
+//                    <input type="text" onChange={this.handleChange}/>
+//                    <p ref={(complentP)=>{this.complentP=complentP;}}>{this.state.text}</p>
+//                </div>
+//            }
+            //实现方式2 改变 MyComplent 的 state, 动态改变 p 标签
+            render() {
+                return <div>
+                    <input type="text" onChange={this.handleChange} placeholder={this.state.text} ref={(input)=>{
+                        this.input = input;
+                    }}/>
+                    <p>{this.state.text}</p>
+                    <button onClick={this.cleanText.bind(this)}>清除 text</button>
+                </div>
+            }
+        }
+        ReactDOM.render(<MyComplent/>,document.getElementById('demo4'));
+    </script>
+</body>
+</html>

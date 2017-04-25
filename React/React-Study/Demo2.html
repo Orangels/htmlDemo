@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Demo2,处理子节点</title>
+    <script src="//cdn.bootcss.com/react/15.4.2/react.js"></script>
+    <script src="//cdn.bootcss.com/react/15.4.2/react-dom.js"></script>
+    <script src="//cdn.bootcss.com/babel-standalone/6.23.1/babel.js"></script>
+</head>
+<body>
+    <div id="demo2"></div>
+    <script type="text/babel">
+        class MyComplent extends React.Component{
+
+            render(){
+                return (
+                    <ol>
+                        {
+                            React.Children.map(this.props.children,(child)=>{
+                                return <li>{child}</li>
+                            })
+                        }
+                    </ol>
+                )
+            }
+        }
+        ReactDOM.render(
+            <MyComplent>
+                <span>111</span>
+                <span>222</span>
+            </MyComplent>,
+            document.getElementById('demo2'));
+    </script>
+</body>
+</html>

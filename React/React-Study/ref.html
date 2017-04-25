@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>refs</title>
+    <script src="//cdn.bootcss.com/react/15.4.2/react.js"></script>
+    <script src="//cdn.bootcss.com/react/15.4.2/react-dom.js"></script>
+    <script src="//cdn.bootcss.com/babel-standalone/6.23.1/babel.js"></script>
+</head>
+<body>
+    <div id="demo3"></div>
+    <script type="text/babel">
+        class CustomTextInput extends React.Component {
+            constructor(props) {
+                super(props);
+                //ref 通常用于获取真实的 DOM
+                //focus 方法是 button 调用的,所以要绑定 this,也可以用箭头函数 作为 onClick 的 callback,或者把 bind(this)写在 onclick 赋值那里
+                this.focus = this.focus.bind(this);
+                if (this.aaa){
+                    console.log('存在 aaa');
+                }else {
+                    console.log('不存在 aaa');
+                }
+            }
+
+            focus() {
+                // Explicitly focus the text input using the raw DOM API
+                console.log(this);
+                console.log(this.aaa);
+                this.aaa.focus();
+            }
+
+            render() {
+                // Use the `ref` callback to store a reference to the text input DOM
+                // element in this.textInput.
+                return (
+                    //ref属性也可以是一个回调函数而不是一个名字。
+                    //这个函数将要在组件被挂载之后立即执行。这个参照的组件将会作为该函数的参数，
+                    // 这个函数可以立即使用这个组件参数，当然也可以将其保存供以后使用。
+                        <div>
+                            <input
+                                    type="text"
+                                    ref={(input) => { this.aaa = input; }} />
+                            <input
+                                    type="button"
+                                    value="Focus the text input"
+                                    onClick={this.focus.bind(this)}
+                            />
+                        </div>
+                );
+            }
+        }
+        ReactDOM.render(
+                <CustomTextInput></CustomTextInput>,
+            document.getElementById('demo3')
+        )
+    </script>
+</body>
+</html>

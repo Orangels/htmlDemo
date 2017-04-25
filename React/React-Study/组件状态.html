@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="//cdn.bootcss.com/react/15.4.2/react.js"></script>
+    <script src="//cdn.bootcss.com/react/15.4.2/react-dom.js"></script>
+    <script src="//cdn.bootcss.com/babel-standalone/6.23.1/babel.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+      //this.setState 方法就修改状态值，每次修改以后，自动调用 this.render 方法，再次渲染组件。
+  class MyTitle extends React.Component {
+      constructor(props) {
+          super(props);
+          //this 绑定可以写在构造函数 初始化这里,也可以写在 onChange 函数赋值那里
+//          this.handleChange = this.handleChange.bind(this);
+          this.state = {
+              name: '访问者'
+          };
+      }
+      //e 是事件, e.target 返回事件的目标节点(触发该事件的节点)
+      handleChange(e) {
+          let name = e.target.value;
+          console.log(e.target);
+          console.log(this);
+          this.setState({
+              name: name
+          });
+      }
+
+      render(){
+//         onChange 这里可以写成 箭头函数,而不用绑定 this
+          return <div>
+              <input type="text" onChange={this.handleChange.bind(this)} />
+              <p>你好,{this.state.name}</p>
+          </div>
+      }
+  };
+
+  ReactDOM.render(
+    <MyTitle/>,
+    document.getElementById('example')
+  );
+    </script>
+  </body>
+</html>

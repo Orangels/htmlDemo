@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>下拉菜单实例|W3Cschool教程(w3cschool.cn)</title>
+    <meta charset="utf-8">
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            /*overflow: hidden;*/
+            background-color: #333;
+        }
+
+        li {
+            float: left;
+        }
+
+
+
+        li >div>a, .dropbtn {
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li>div:hover >a, .dropdown:hover .dropbtn {
+            background-color: #111;
+            /*要设置底部的 border 要现在当前的标签显示 border, 如果全都从没有 border 到 hover 有 border, 高度会产生变化,效果不好*/
+            /*border-bottom:3px solid #cc0000;*/
+        }
+
+        .dropdown ,li>div{
+            display: inline-block;
+            position: relative;
+        }
+
+        .dropdown-content ,li>div>div {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 130px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            /*改变菜单位置*/
+            /*left: 64px;*/
+            /*top: 0px;*/
+            /*z-index: 1;*/
+        }
+
+        div a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover ,li>div> div a:hover {
+            background-color: #f1f1f1;
+        }
+
+
+        .dropdown:hover .dropdown-content,li>div:hover div{
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+
+<ul>
+    <li>
+        <div>
+            <a href="导航下拉菜单_未改.html" target="_blank">主页</a>
+            <div class="">
+                <a href="#">链接 1</a>
+                <a href="#">链接 2</a>
+                <a href="#">链接 3</a>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div>
+            <a href="导航下拉菜单_未改.html" target="_blank">新闻</a>
+            <div class="">
+                <a href="#">链接 1</a>
+                <a href="#">链接 2</a>
+                <a href="#">链接 3</a>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div>
+            <a href="导航下拉菜单_未改.html" target="_blank">下拉菜单1</a>
+            <div class="">
+                <a href="#">链接 1</a>
+                <a href="#">链接 2</a>
+                <a href="#">链接 3</a>
+            </div>
+        </div>
+    </li>
+
+
+    <div class="dropdown">
+        <a href="导航下拉菜单_未改.html" target="_blank" class="dropbtn">下拉菜单2</a>
+        <div class="dropdown-content">
+            <a href="#">div链接 1</a>
+            <a href="#">div链接 2</a>
+            <a href="#">div链接 3</a>
+        </div>
+    </div>
+</ul>
+
+<h3>导航栏上的下拉菜单</h3>
+<p>鼠标移动到 "下拉菜单" 链接先显示下拉菜单。</p>
+
+</body>
+</html>

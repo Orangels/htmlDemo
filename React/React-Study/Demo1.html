@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>React
+    Demo1</title>
+    <script src="//cdn.bootcss.com/react/15.4.2/react.js"></script>
+    <script src="//cdn.bootcss.com/react/15.4.2/react-dom.js"></script>
+    <script src="//cdn.bootcss.com/babel-standalone/6.23.1/babel.js"></script>
+    <style type="text/css">
+        h1{
+            color: bisque;
+        }
+        .abc{
+            color: chartreuse;
+        }
+    </style>
+</head>
+<body>
+    <div id="example"></div>
+    <div id="complent"></div>
+
+    <script type="text/babel">
+        let names = ['ls','hy','tf','cm'];
+        ReactDOM.render(
+            <div>
+                {names.map(
+                    (name)=> {
+                        if (name === 'ls'){
+                            return <div>I am {name}</div>
+                        }else {
+                            return <div>{name} is my friend</div>
+                        }
+                    }
+                )}
+            </div>,
+            document.getElementById('example')
+        );
+        //组件
+        class MyComplent extends React.Component{
+            //构造函数,相当于 ios 的 init 函数
+            constructor (props) {
+                super(props);
+            }
+            //属性,ios 的 property
+            static defaultProps = {
+                aaa:'ls',
+                years:27,
+            };//注意这里有分号，用 `class` 定义的类内部的属性需要用分号 `;` 间隔开，方法不需要.
+
+            static propTypes = {
+                aaa:React.PropTypes.string.isRequired,
+                years:React.PropTypes.number.isRequired,
+            };
+
+
+            render(){
+                return <h1 className="abc">hello {this.props.aaa}</h1>
+            }
+        }
+        ReactDOM.render(
+            <div>
+                {names.map(
+                    (name)=>{
+                        return <MyComplent aaa={name}></MyComplent>
+                    }
+                )}
+            </div>,
+            document.getElementById('complent')
+        );
+
+    </script>
+</body>
+</html>
